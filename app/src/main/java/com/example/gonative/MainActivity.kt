@@ -6,6 +6,7 @@ import android.provider.Telephony.Mms.Addr
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,27 +33,48 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gonative.ui.theme.AppTheme
+import com.example.gonative.LoginPage
+import com.example.gonative.SignupPage
+import androidx.compose.runtime.getValue
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Create instance of AuthViewModel
+        val authViewModel: AuthViewModel by viewModels()
+
         setContent {
             AppTheme {
                 val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+
+                // Define the screens that require a bottom bar
+                val screensWithBottomBar = listOf("home", "review", "add review", "events", "profile")
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-                        BottomAppBar(navController = navController)
+                        if (navBackStackEntry?.destination?.route in screensWithBottomBar) {
+                            BottomAppBar(navController = navController)
+                        }
                     }
                 ) { innerPadding ->
 
                     NavHost(
                         navController = navController,
-                        startDestination = "home",
+                        startDestination = "login",
                         modifier = Modifier.padding(innerPadding)
                     ) {
+                        // Navigation destinations
+                        composable("login") {
+                            LoginPage(Modifier, navController, authViewModel)
+                        }
+                        composable("signup") {
+                            SignupPage(Modifier, navController, authViewModel)
+                        }
                         composable("home") {
                             Home()
                         }
@@ -62,11 +84,12 @@ class MainActivity : ComponentActivity() {
                         composable("add review") {
                             AddReviewRatings()
                         }
-                        composable("events"){
-                            //add evets screen  func here
+                        composable("events") {
+                            // Add events screen function here
                         }
                         composable("profile") {
-                            //add profile screen func here
+                            // Add profile screen function here
+                            Profile(Modifier, navController, authViewModel)
                         }
                     }
                 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "807622732105",
+    "project_id": "gonativeapp-5393e",
+    "storage_bucket": "gonativeapp-5393e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807622732105:android:92c1357e8effb37dd69298",
+        "android_client_info": {
+          "package_name": "com.example.gonative"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBO4cSUBYbc8KEucOuz48hpPMygGGfe1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
