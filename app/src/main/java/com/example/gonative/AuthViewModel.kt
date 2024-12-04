@@ -22,8 +22,8 @@ class AuthViewModel : ViewModel() {
     }
 
     fun checkAuthState() {
-        val currentUser = auth.currentUser
-        if (currentUser == null) {
+        //val currentUser = auth.currentUser
+        if (auth.currentUser == null) {
             _authState.value = AuthState.Unauthenticated
         } else {
             _authState.value = AuthState.Authenticated
@@ -100,7 +100,7 @@ class AuthViewModel : ViewModel() {
     fun signout() {
         auth.signOut()
         _authState.value = AuthState.Unauthenticated
-        _userData.value = null
+        //_userData.value = null
     }
 
     fun getCurrentUser() = FirebaseAuth.getInstance().currentUser

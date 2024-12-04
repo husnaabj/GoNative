@@ -81,7 +81,7 @@ fun Profile(modifier: Modifier = Modifier, navController: NavController, authVie
         ) {
             // Profile Picture
             Image(
-                painter = painterResource(id = R.drawable.profile), // Replace with your image resource
+                painter = painterResource(id = R.drawable.user), // Replace with your image resource
                 contentDescription = "Profile Picture",
                 modifier = Modifier
                     .size(100.dp)
